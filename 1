@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <title>隨機字卡產生器</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      padding: 50px;
+      background-color: #f0f0f0;
+    }
+    #card {
+      margin-top: 30px;
+      font-size: 24px;
+      font-weight: bold;
+      background-color: white;
+      display: inline-block;
+      padding: 20px 40px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+    .button {
+      padding: 10px 20px;
+      font-size: 18px;
+      border: none;
+      border-radius: 8px;
+      background-color: #4CAF50;
+      color: white;
+      cursor: pointer;
+      margin: 10px;
+    }
+    .button:hover {
+      background-color: #45a049;
+    }
+    .reset-button {
+      background-color: #f44336;
+    }
+    .reset-button:hover {
+      background-color: #d32f2f;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>抽字卡挑戰</h1>
+  <button class="button" onclick="drawCard()">抽字卡</button>
+  <button class="button reset-button" onclick="resetCard()">重製</button>
+
+  <div id="card" style="display:none;"></div>
+
+  <script>
+    const conditions = [
+      "不能用槍",
+      "不能開鏡",
+      "不能滑鏟",
+      "不能跳躍",
+      "只能用隨機武器",
+      "不能用快速近戰",
+      "不能沒打完換彈",
+      "不能用投擲物",
+      "只能用 DL",
+      "只能用副武器"
+    ];
+
+    function drawCard() {
+      const shuffled = conditions.sort(() => 0.5 - Math.random());
+      const selected = shuffled.slice(0, 2);
+      const card = document.getElementById('card');
+      card.textContent = `${selected[0]} / ${selected[1]}`;
+      card.style.display = 'block';
+    }
+
+    function resetCard() {
+      const card = document.getElementById('card');
+      card.textContent = '';
+      card.style.display = 'none';
+    }
+  </script>
+
+</body>
+</html>
